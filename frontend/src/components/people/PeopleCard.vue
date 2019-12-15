@@ -11,7 +11,21 @@
             <b-col>{{ person.phone }}</b-col>
         </b-row>
 
-        <b-button href="#" variant="primary" @click="onClose">Close</b-button>
+        <b-row class="mb-2">
+            <b-col class="text-sm-center">
+                <b-table v-if="person.books.length > 0" striped hover bordered :items="person.books" :fields="bookFields"></b-table>
+                <template v-else>
+                    {{ person.firstName }} has not borrowed any books.
+                </template>
+            </b-col>
+        </b-row>
+
+        <b-row class="mb-2">
+            <b-col class="text-sm-right">
+                <b-button href="#" variant="primary" @click="onClose">Close</b-button>
+            </b-col>
+        </b-row>
+
     </b-card>
 </template>
 
@@ -21,6 +35,25 @@
           person: {
               required: true
           }
+        },
+        data() {
+            return {
+                bookFields: [
+                    {
+                        key: 'title',
+                        sortable: true
+                    },
+                    {
+                        key: 'author',
+                        sortable: true
+                    },
+                    {
+                        key: 'isbn',
+                        label: 'ISBN',
+                        sortable: true,
+                    },
+                ]
+            }
         },
         methods: {
             getCardHeader() {

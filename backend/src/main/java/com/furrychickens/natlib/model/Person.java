@@ -1,13 +1,12 @@
 package com.furrychickens.natlib.model;
 
+import com.furrychickens.natlib.model.dto.PersonDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -29,4 +28,11 @@ public class Person {
 
     @NonNull
     private String email;
+
+    @OneToMany(mappedBy = "borrowedBy", cascade = { CascadeType.ALL })
+    private List<Book> books;
+
+    public PersonDto toPersonDto() {
+        return new PersonDto(id, firstName, lastName, phone, email);
+    }
 }

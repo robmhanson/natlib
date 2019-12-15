@@ -1,12 +1,20 @@
 <template>
-  <div>
+  <div class="generic-page-wrapper">
     <h1>{{ title}}</h1>
 
+    <div class="button-wrapper">
+      <slot name="addCardButton" />
+    </div>
+
     <div class="table-wrapper">
-      <b-table striped hover sticky-header bordered :items="items" primary-key="id" :fields="fields" :selectable="showDetails" @row-clicked="onRowSelected"></b-table>
+      <b-table striped hover bordered fixed :items="items" primary-key="id" :fields="fields" @row-clicked="onRowSelected"></b-table>
 
       <div v-if="selectedRow" class="table-row-details">
-        <slot name="selectedCard" :person="selectedRow" />
+        <slot name="selectedCard" />
+      </div>
+
+      <div v-if="showAddCard" class="table-row-details">
+        <slot name="addCard" />
       </div>
     </div>
   </div>
@@ -27,27 +35,30 @@
                 required: true,
                 type: Array
             },
-            showDetails: {
+            showAddCard: {
+                required: true,
                 type: Boolean
-            }
+            },
         },
         data() {
             return {
-                selectedRow: null
+                selectedRow: null,
             }
         },
         methods: {
             onRowSelected(row) {
-                if (this.showDetails) {
-                    this.selectedRow = row;
-                    this.$emit("onRowSelected", row);
-                }
+                this.selectedRow = row;
+                this.$emit("onRowSelected", row);
             }
-        },
+         },
     };
 </script>
 
 <style scoped lang="scss">
+  .generic-page-wrapper {
+    position: relative;
+  }
+
   .table-wrapper {
     padding: 20px;
     position: relative;
@@ -59,5 +70,11 @@
     left: 35%;
     width: 35%;
     z-index: 2;
+  }
+
+  .button-wrapper {
+    position: absolute;
+    right: 20px;
+    top: 10px;
   }
 </style>

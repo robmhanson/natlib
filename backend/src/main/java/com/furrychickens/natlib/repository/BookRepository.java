@@ -1,16 +1,12 @@
 package com.furrychickens.natlib.repository;
 
 import com.furrychickens.natlib.model.Book;
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-@RepositoryRestResource(collectionResourceRel = "books", path = "books")
-public interface BookRepository extends PagingAndSortingRepository<Book, Long> {
+public interface BookRepository extends JpaRepository<Book, Long> {
+    List<Book> findByBorrowedById(Long personId);
 
-    Book findByISBN(String isbn);
-
-    List<Book> findByTitle(String title);
-
+    Book findByIsbn(String isbn);
 }
