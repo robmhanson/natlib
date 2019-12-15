@@ -1,4 +1,4 @@
-#National Library Demo
+# National Library Demo
 
 A simple Spring Boot/Vue demo.
 
@@ -7,7 +7,7 @@ The project contains two maven modules:
 1. frontend - which contains a Vue frontend
 1. backend - which contains a SpringBoot backend
 
-###Deploy and Run
+### Deploy and Run
 To run execute and deploy the entire project, execute the following from the project root directory:
 
 __mvn jetty:run-war__
@@ -16,7 +16,7 @@ Once build, the war will be deployed to jetty on port 8888 and can be accessed a
 
 __http://localhost:8888/natlib/__
 
-###Using the Demo
+### Using the Demo
 The demo consists of two pages:
 
 1. People - displaying the people in the database
@@ -26,7 +26,7 @@ Each page contains an add button for adding either a Person or Book to the syste
 
 The data model is very simplistic, but selecting a person displays which (if any) books the person has borrowed.  Selecting a book provides the ability to borrow or return a book.  
 
-###Technologies Used
+### Technologies Used
 1. Backend
     * SpringBoot
     * Maven
@@ -41,9 +41,6 @@ The data model is very simplistic, but selecting a person displays which (if any
     * Webpack
     * Node
     * Jest
-   
-I have added a few unit tests examples but the code coverage is in no way thorough. 
-
 
 
 
